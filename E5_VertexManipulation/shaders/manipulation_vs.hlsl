@@ -16,6 +16,7 @@ cbuffer TimeBuffer : register(b1)
 	float amplitude;
 	float frequency;
 	float speed;
+	float4 scale;
 };
 
 struct InputType
@@ -49,7 +50,9 @@ float3 calcNormals(float3 position) {
 	/*//offset position based on sine wave
 	//input.position.y = amplitude*sin((input.position.x * frequency) + (time* speed));
 	//input.position.y += amplitude * cos((input.position.z * frequency) + (time * speed));
+
 	//modify normals
+
 	input.normal.x = 1 - amplitude * cos((input.position.x * frequency) + (time * speed));
 	input.normal.y = abs(amplitude * cos((input.position.x * frequency) + (time * speed)));*/
 
@@ -73,7 +76,7 @@ float3 calcNormals(float3 position) {
 	neighbourN.x = position.x;
 	neighbourN.y = position.y;
 	neighbourN.z = position.z + 1;
-//	neighbourN.y = amplitude * sin((neighbourN.x * frequency) + (time * speed));// +amplitude * cos((neighbourN.z * frequency) + (time * speed));
+	//neighbourN.y = amplitude * sin((neighbourN.x * frequency) + (time * speed));// +amplitude * cos((neighbourN.z * frequency) + (time * speed));
 	
 	vectorSouth = normalize(neighbourS - position);
 	vectorWest = normalize(neighbourW - position);
@@ -101,33 +104,34 @@ OutputType main(InputType input)
 	OutputType output;
 
 	//offset position based on sine wave
-	//input.position.y = amplitude*sin((input.position.x * frequency) + (time* speed));
-	//input.position.y += amplitude * cos((input.position.z * frequency) + (time * speed));
-	
-	//modify normals
+	input.position.y = amplitude*sin((input.position.x * frequency) + (time* speed));
+	input.position.y += amplitude * cos((input.position.z * frequency) + (time * speed));	
 
+
+	/*//modify normals
 	//z = s, x = t
 	//float3 dr/dt = float3(2t, s, s ^ 2 - 2st);
 	//float3 dr/ds float3(-2s, t, 2ts -t^2)
 	//float3 normalResult = cross( dr/dt, dr/ds)
-
-	/*float3 xDerivative = float3(2 * input.position.x, input.position.z, pow(input.position.z, 2) -2 * (input.position.z * input.position.x));
+	float3 xDerivative = float3(2 * input.position.x, input.position.z, pow(input.position.z, 2) -2 * (input.position.z * input.position.x));
 	float3 zDerivative = float3(-2 * input.position.z, input.position.x, (2 *(input.position.x * input.position.z)) - pow(input.position.x, 2));
 	float3 result = cross(zDerivative, xDerivative);
 	input.normal = result;*/
 
+
 	input.normal = calcNormals(input.position);
+
 
 	////input.position.xyz += input.normal * (amplitude * sin((input.position.x * frequency) + (time * speed)));// +amplitude * cos((input.position.z * frequency) + (time * speed)));
 	//input.position.y += input.normal.y;
 	//input.position.x += input.normal.x;
 	//input.position.z += input.normal.z;
 
-	float textureColor = texture0.SampleLevel(sampler0, input.tex, 0);
-	float offest = (textureColor * 35);
-	input.position.y += input.normal.y * offest;
-	input.position.x += input.normal.x * offest;
-	input.position.z += input.normal.z * offest;
+	//float textureColor = texture0.SampleLevel(sampler0, input.tex, 0);
+	//float offest = (textureColor * scale.x);
+	//input.position.y += input.normal.y * offest;
+	//input.position.x += input.normal.x * offest;
+	//input.position.z += input.normal.z * offest;
 
 	// Calculate the position of the vertex against the world, view, and projection matrices.
 	output.position = mul(input.position, worldMatrix);

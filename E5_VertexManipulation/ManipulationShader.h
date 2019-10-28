@@ -29,13 +29,14 @@ private:
 		float amplitude;
 		float frequency;
 		float speed;
+		XMFLOAT4 scale;
 	};
 
 public:
 	ManipulationShader(ID3D11Device* device, HWND hwnd);
 	~ManipulationShader();
 
-	void setShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX &world, const XMMATRIX &view, const XMMATRIX &projection, ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* textureTex, Light* light, Light* Ptlight, float time_, float amplitude_, float frequency_, float speed_);
+	void setShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX &world, const XMMATRIX &view, const XMMATRIX &projection, ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* textureTex, Light* light, Light* Ptlight, float time_, float amplitude_, float frequency_, float speed_, float scale);
 
 private:
 	void initShader(const wchar_t* cs, const wchar_t* ps);

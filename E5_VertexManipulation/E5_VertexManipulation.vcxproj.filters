@@ -24,12 +24,24 @@
     <ClCompile Include="ManipulationShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TreeSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeTop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ManipulationShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeSegment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeTop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

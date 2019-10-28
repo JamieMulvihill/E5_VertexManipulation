@@ -103,7 +103,7 @@ void ManipulationShader::initShader(const wchar_t* vsFilename, const wchar_t* ps
 }
 
 
-void ManipulationShader::setShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX &worldMatrix, const XMMATRIX &viewMatrix, const XMMATRIX &projectionMatrix, ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* textureTex, Light* light, Light* Ptlight, float time_, float amplitude_, float frequency_, float speed_)
+void ManipulationShader::setShaderParameters(ID3D11DeviceContext* deviceContext, const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projectionMatrix, ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* textureTex, Light* light, Light* Ptlight, float time_, float amplitude_, float frequency_, float speed_, float scale)
 {
 	HRESULT result;
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -134,6 +134,7 @@ void ManipulationShader::setShaderParameters(ID3D11DeviceContext* deviceContext,
 	timePtr->amplitude = amplitude_;
 	timePtr->frequency = frequency_;
 	timePtr->speed = speed_;
+	timePtr->scale.x = scale;
 	deviceContext->Unmap(timeBuffer, 0);
 	deviceContext->VSSetConstantBuffers(1, 1, &timeBuffer);
 

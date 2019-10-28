@@ -166,10 +166,14 @@
     <ClCompile Include="App1.cpp" />
     <ClCompile Include="ManipulationShader.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TreeSegment.cpp" />
+    <ClCompile Include="TreeTop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App1.h" />
     <ClInclude Include="ManipulationShader.h" />
+    <ClInclude Include="TreeSegment.h" />
+    <ClInclude Include="TreeTop.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DXFramework\DXFramework.vcxproj">
